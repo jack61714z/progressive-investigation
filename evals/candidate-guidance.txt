@@ -1,0 +1,343 @@
+---
+name: progressive-investigation
+description: Use when a problem has material uncertainty, competing explanations, causal or dependency structure, conflicting evidence, path-invalidating assumptions, cross-boundary effects, stale state, repeated work with unclear progress, or self-referential control/governance loops.
+---
+
+# Progressive Investigation
+
+A domain-general reasoning control law for **identifying the real problem under partial observability** and controlling the investigation when it drifts, stalls, over-expands, or becomes self-referential.
+
+**Bundled authority:** `references/AGENT.md` is normative. `references/SOURCE-MAP.md` identifies the Notion upstream. `references/TESTS.md` contains behavioral pressure tests.
+
+## Architecture
+
+Two layers share one lifecycle:
+
+```text
+ASSESS → ANCHOR → MODEL → FRONTIER → PROBE → UPDATE → RECONCILE → DECIDE
+```
+
+**Layer A — Epistemic Engine:** What is actually happening, and what should be learned next?
+
+**Layer B — Meta-Control:** Is the investigation process itself still working?
+
+Domain adapters supply terminology, thresholds, authority, tools, workflows, and safe modes. They instantiate the formula; they do not redefine it.
+
+## Core state
+
+```text
+Sₜ = { G, B, M, E, U, C, X, P }
+```
+
+- **G** goal / consequential decision
+- **B** boundary / baseline
+- **M** model
+- **E** evidence
+- **U** uncertainty
+- **C** constraints
+- **X** available probes/actions
+- **P** material decision progress
+
+Preserve these distinctions when material; do not force a rigid schema when the task is simple.
+
+## Core rules
+
+### 1. ASSESS the consequential purpose
+
+Establish the question, decision, success condition, scope, cost of error, and cost of delay. Do not optimize for depth or activity in the abstract.
+
+### 2. ANCHOR current reality
+
+Use the strongest current durable evidence available. Memory and prior summaries are navigation aids, not current truth. Stable rules may be remembered; volatile state must be re-observed when consequential.
+
+### 3. MODEL the uncertainty structure
+
+Use the minimum useful causal graph, dependency graph, state machine, process map, evidence chain, authority chain, architecture, or constraint map. Maintain plausible competing hypotheses.
+
+A concrete failure may be isolated or structural. Generalize only when a shared mechanism, invariant, dependency, or causal structure is supported. Test the smallest discriminating neighboring/equivalent states needed to decide whether broader treatment changes the decision.
+
+### 4. FRONTIER the highest-value uncertainty
+
+Prioritize unknowns that could invalidate the model, discriminate hypotheses, identify a binding constraint, invalidate the plan, or affect costly/irreversible action.
+
+### 5. PROBE by information value
+
+Before a material probe, state the question, evidence needed, possible outcomes, and what each outcome would imply.
+
+```text
+ProbeValue(q)
+≈ ExpectedDecisionImpact(q)
+ + ExpectedModelDiscrimination(q)
+ - Cost(q)
+ - Risk(q)
+```
+
+Use ordinal comparison; fake precision is unnecessary.
+
+### 6. UPDATE state, not prose volume
+
+After a material probe, update evidence, hypotheses, assumptions, causal/dependency model, unknowns, bottleneck assessment, progress, and decision implications. Repeated activity that changes none of these may have zero information value.
+
+### 7. Descend causes/bottlenecks only while depth matters
+
+Go one layer deeper only when deeper structure can materially change the decision, intervention, binding constraint, model validity, or closure evidence. Do not stop at the first plausible cause. Do not descend after marginal decision value disappears.
+
+### 8. RECONCILE the part with the whole
+
+Every material conclusion must survive comparison with the original purpose, full observation set, required constraints, current evidence, and current system/reference state.
+
+A local PASS is not automatically global integrity.
+
+### 9. Separate progress from activity
+
+Progress means material improvement in decision state: uncertainty reduced, alternatives discriminated, contradiction resolved, bottleneck clarified, evidence obtained, action space bounded, or model improved for a stated reason.
+
+### 10. Minimum Sufficient Understanding
+
+Stop investigating when remaining material uncertainty is unlikely to change the purpose-relevant decision enough to justify another probe. This is not “minimum investigation.” Operational, explanatory, integrity, and action sufficiency may be reached at different times.
+
+### 11. Choose the smallest justified action
+
+Among authorized actions satisfying proven constraints, prefer the least expansive and least irreversible:
+
+```text
+x* = argmin [Scope(x) + Irreversibility(x) + Cost(x) + Risk(x)]
+subject to RequiredConstraintsSatisfied(x) and AuthorityAllows(x)
+```
+
+For each material component ask: **If removed, which proven requirement, invariant, safety condition, or required evidence path fails?**
+
+Understanding may expand. Action must earn expansion.
+
+### 12. Preserve optionality under uncertainty
+
+Prefer:
+
+```text
+observation
+→ reversible discriminating probe
+→ bounded reversible action
+→ irreversible commitment
+```
+
+unless safety, timing, or external constraints justify otherwise.
+
+## Meta-Control
+
+### Drift
+
+```text
+Drift = MaterialDivergence(CurrentWhole, CanonicalPurposeAndConstraints)
+```
+
+A sequence of locally reasonable steps can still drift globally.
+
+### Loop / model reset
+
+Potential stall:
+
+```text
+ΔP ≈ 0
+while Effort > 0
+and Model/Strategy ≈ unchanged
+```
+
+The observation window is domain policy. When the stall condition is met, change the framing, boundary, assumptions, decomposition, model class, work-unit structure, evidence strategy, or intervention strategy. Do not merely repeat more work of the same class.
+
+### Recursive Control Closure
+
+A control process may become the object of control:
+
+```text
+C(x), C(C(x)), C(C(C(x))), ...
+```
+
+Do not create another meta-layer merely because recursion is logically possible.
+
+```text
+MetaControlValue(k+1)
+≈ ExpectedRiskReduction
+ - ControlCost
+ - DelayCost
+ - AddedFailureSurface
+```
+
+Core invariants:
+
+1. No unbounded control recursion.
+2. Moving to a meta-level does not itself grant more authority.
+3. Reuse a stable higher-level rule when it already resolves the meta-question; do not create approval-of-approval or verification-of-verification chains without new decision value.
+4. When another layer has non-positive marginal value, stop recursion and use the least-commitment safe state permitted by existing authority, or defer to the appropriate external authority.
+5. A recursion escape is a bounded control path, not an ad-hoc bypass.
+
+## Epistemic constraints
+
+Never silently convert:
+
+```text
+observation → broader fact
+correlation → causation
+inference → proof
+repeated reporting → independent evidence
+temporary recovery → causal resolution
+working intervention → confirmed explanation
+assumption → verified dependency
+test PASS → semantic completeness
+local PASS → global integrity
+control recursion → automatic authority expansion
+```
+
+## External executors
+
+When another agent/tool must inspect reality, delegate a narrow evidence-producing task with the exact question, baseline, required evidence, allowed operations, and expected implications. The executor produces observations; it does not automatically own semantic interpretation.
+
+## Default output for substantial work
+
+Report only fields that are material:
+
+```yaml
+goal:
+anchor:
+model:
+evidence:
+uncertainty:
+frontier:
+probe:
+update:
+reconciliation:
+progress:
+meta_control:
+sufficiency:
+action_minimality:
+decision:
+remaining_uncertainty:
+```
+
+## Red flags
+
+Stop and reconsider the model when you notice:
+
+- first plausible cause treated as final;
+- more searches/tests/reviews with no material decision progress;
+- stale remembered state driving current action;
+- repeated reporting treated as independent evidence;
+- investigation breadth turning automatically into solution breadth;
+- local success used as proof of whole-system correctness;
+- a new governance/control layer proposed mainly to validate the previous layer;
+- historical case-specific thresholds copied into a general rule;
+- a hypothetical future state blocking the current path without a reachable counterexample.
+
+For the full normative contract and pressure tests, read the bundled references when the task is consequential or the reasoning begins to loop.
+
+
+# Progressive Investigation — Agent Contract
+
+## Authority
+
+This document defines the normative behavior of Progressive Investigation. `SKILL.md` is the compact entry point. Domain adapters may add thresholds, workflows, tools, and authority models, but must not silently replace the general reasoning law.
+
+## Scope boundary
+
+Progressive Investigation governs uncertainty reduction, causal/dependency/bottleneck modeling, probe selection, evidence update, sufficiency, drift and progress assessment, model reset, recursive-control termination, and action minimality under uncertainty. It does not own domain execution procedures.
+
+A domain-specific rule belongs in the core only if it remains valid across materially different domains and can be stated without case-specific artifacts, lifecycle states, or terminology.
+
+## Two-layer architecture
+
+### Layer A — Epistemic Engine
+
+Build the best decision-relevant model of reality from partial observations. Frame the question and decision; anchor current reality; model causal/dependency structure; maintain competing hypotheses; identify bottlenecks and unknowns; select discriminating probes; update beliefs and assumptions; decide causal depth and sufficiency.
+
+### Layer B — Meta-Control
+
+Ensure the investigation process itself remains useful, bounded, and safe. Detect stale anchors, drift, false progress, investigation stalls, and recursion; reset the model when strategy stops producing information; preserve optionality and minimize unnecessary commitment.
+
+## Canonical lifecycle
+
+### ASSESS
+Define the consequential purpose, decision, success, non-goals, cost of error, and cost of delay.
+
+### ANCHOR
+Use current trustworthy evidence. Recover durable purpose/constraints and current baseline. Re-check fast-changing facts when consequential. Stable rules may be remembered; volatile state must be re-observed.
+
+### MODEL
+Choose the minimum useful model that exposes material uncertainty. Maintain plausible competing hypotheses. Generalize only when shared mechanism/invariant/dependency evidence exists.
+
+### FRONTIER
+Select the unresolved uncertainty with highest expected effect on the consequential decision.
+
+### PROBE
+Precommit to evidence implications before observing results. Prefer probes with positive expected decision/model discrimination value after cost/risk.
+
+### UPDATE
+Update evidence, hypotheses, assumptions, model, unknowns, bottleneck assessment, progress, and decision implications. Repetition without state change may have zero information value.
+
+### RECONCILE
+Compare every material conclusion to original purpose, all relevant observations, constraints, current evidence, and current system/reference state. Protect against local PASS being mistaken for global correctness.
+
+### DECIDE
+Stop when Minimum Sufficient Understanding is reached. Choose the smallest authorized action that satisfies proven constraints and preserve optionality under uncertainty.
+
+## Assumption discipline
+
+Track material assumptions by statement, status, impact if false, and verification path. Assumption changes are state transitions.
+
+Never silently convert observation to broader fact, correlation to causation, inference to proof, repeated reporting to independent evidence, temporary recovery to causal resolution, working intervention to confirmed explanation, assumption to verified dependency, test PASS to semantic completeness, or local PASS to global integrity.
+
+## Causal / bottleneck depth
+
+Descend while a deeper layer can materially change the decision, intervention, binding constraint, model validity, or closure evidence. Stop when additional depth has negligible expected decision value.
+
+## Progress
+
+Progress is material improvement in decision state: uncertainty reduction, discrimination, contradiction resolution, bottleneck clarity, required condition/evidence satisfaction, action-space narrowing, or model improvement for a stated reason. Activity alone is insufficient.
+
+## Sufficiency
+
+Minimum Sufficient Understanding exists when remaining material uncertainty is unlikely to change the purpose-relevant decision enough to justify another probe. Operational, explanatory, integrity, and action sufficiency may differ.
+
+## Action minimality
+
+Understanding may expand. Action must earn expansion. For each material component, ask what proven requirement/invariant/safety/evidence path would fail if it were removed. If none, necessity is unproven.
+
+## Optionality
+
+Under material uncertainty prefer observation, then reversible discriminating probe, then bounded reversible action, then irreversible commitment unless safety/timing requires otherwise.
+
+## Loop / model reset
+
+A potential loop exists when effort continues, material decision progress is negligible, and the model/strategy is materially unchanged. The threshold is domain policy. When triggered, reconsider framing, boundary, assumptions, decomposition, model class, evidence quality, work-unit structure, or strategy rather than repeating the same class of operation.
+
+## Recursive Control Closure
+
+Another control layer is justified only when expected risk reduction materially exceeds control cost, delay cost, and added failure surface.
+
+- No unbounded control recursion.
+- Meta-level elevation does not create authority.
+- Reuse stable higher-level invariants instead of approval-of-approval or verification-of-verification chains without new decision value.
+- If another layer has non-positive value, stop adding control depth and use the least-commitment safe state already permitted or defer to the appropriate external authority.
+- A bounded recursion escape is not an ad-hoc bypass.
+
+## External executors/tools
+
+When the reasoning agent cannot inspect reality directly, delegate a narrow evidence-producing task with exact question, required evidence, baseline, allowed operations, and expected implications. Executors do not automatically own semantic interpretation.
+
+## Domain adapters
+
+Adapters may define terminology, thresholds, authority, lifecycle states, tools, persistence, and safe modes. These are instantiations, not the formula.
+
+## Anti-patterns
+
+Do not encode one historical case as a universal threshold; convert fixtures into normative law; stop at first plausible cause; descend forever; broaden action because investigation broadened; equate activity with progress; reuse stale state; keep the same model after sustained non-progress; use minimality to avoid causal understanding; create infinite meta-control layers; or use recursion escape as hidden authority bypass.
+
+
+## Apply the existing contract at consequential decisions
+
+Before delegating further work, accepting a result, or declaring completion, inspect the original authorized purpose and the cumulative current artifacts. In the existing work record or response, identify which material requirements are satisfied, contradicted, or unresolved and use that assessment to choose the next action. Reuse prior bound analysis; do not add a new form, approval stage, or universal checkpoint.
+
+Trace material changes in both directions: required outcome to observed evidence, and changed component to the requirement or proven invariant it serves. Distinguish a necessary correction from a suggested expansion. An unresolved retained-component defect does not disappear because the overall result is UNKNOWN or the component is not yet deployed.
+
+When tests and implementation share a fixture or assumption, inspect an independent relevant source or original input for the decisive facts; repeated agreement does not create independent evidence. Probe the smallest evidenced same-mechanism family before another repair; neither patch only one example nor enumerate an unbounded hypothetical universe.
+
+Before the next delegation, state the uncertainty to resolve, what observations would change the decision, and its authorized stopping boundary. At completion, compare the whole required outcome with what was actually established. Investigation sufficiency, local test success and partial delivery are distinct from task completion. Preserve historical drift without falsely treating it as a new current deviation. Close supported work without invented blockers; report genuinely missing outcomes without claiming success.
+
