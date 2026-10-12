@@ -33,6 +33,19 @@ A file-reading assistant can use the documents directly without an installer. Au
 
 Read supporting documents when relevant; they do not require a new reporting format or another approval layer. Existing task records can carry the decisions and evidence.
 
+## Optional companion guidance
+
+PI's epistemic engine and meta-control govern investigation, including its drift, progress and stopping. The following independently maintained guides address other responsibilities when separately adopted under the host's authority:
+
+- [Goal drift control](https://github.com/jack61714z/goal-drift-control): alignment of the task's cumulative direction and next action with its original outcome.
+- [Bounded improvement](https://github.com/jack61714z/bounded-improvement): Issue/PR closure learning and proportionate validation of justified improvements.
+- [Task tracking](https://github.com/jack61714z/task-tracking): existing work-item registration, updates and persistence verification.
+- [Work-record templates](https://github.com/jack61714z/work-record-templates): optional presentation of assignments, results and reviews; templates do not create policy.
+
+PI works without any of these guides, and each can be used or updated independently. No shared package, schema, runtime or synchronized version is required. Their publication does not activate them, alter installed host duties, or change PI's triggers or investigation method.
+
+When returning an investigation to any caller, carry the applicable goal and constraints, evidence and its limits, material unknowns, supported decision and smallest justified next step in the caller's existing format. Preserve material identity, baseline and authority context; do not require a new record. Sufficient understanding for that decision is not absolute certainty, task closure or proof that the parent outcome is complete.
+
 ## Examples and verification
 
 [Worked decisions](examples/decisions.md) show a shared test assumption, a misleading research shortlist, and a completed edit that needs no further process.
@@ -50,3 +63,4 @@ The material is maintained here as a portable source distribution. Publishing it
 ## License
 
 [MIT](LICENSE).
+
