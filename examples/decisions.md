@@ -26,6 +26,12 @@ The goal is exactly two text replacements while preserving all other bytes. The 
 
 Return the text and stop. A new interview, extra approval form, independent model review or deployment would add work without changing this decision.
 
+## 4. A shortened tool return is an observation-path question
+
+A tool response contains a truncation marker, but a required long JSON field appears after it. Competing explanations are actual source omission versus selective capture of an otherwise sufficient return. Inspect the model-visible retained value, decode its escapes and compare the required field with the authorized source. If it is intact, withdraw the omission claim and retain any other genuine missing coverage. Presence establishes availability, not comprehension.
+
+A large inner command budget does not guarantee the outer tool return retains the same content. If material content really is absent, locate the lossy boundary and choose a bounded return that fits it. Increasing the same inner budget without a changed capture strategy is not a discriminating retry. This illustrates AGENT probe-path validity and LOOP-BREAK; it adds no mandatory session format, Token accounting rule or completion lifecycle to the core.
+
 ## Applying the lesson in ongoing work
 
 At a consequential delegation, acceptance or completion decision, use the existing task record to connect the original required outcome with the cumulative actual artifacts. Check decisive original inputs or producer facts when implementation and tests may share assumptions. Assign the smallest evidence-changing next step, or close when the evidence is already sufficient. Preserve genuine unknowns and historical drift without turning either into an unlimited repair mandate.
