@@ -1,6 +1,6 @@
 ---
 name: progressive-investigation
-description: Use for unclear root causes, conflicting evidence, repeated ineffective fixes, cross-boundary dependencies or stalled investigations; choose discriminating observations and stop unproductive repetition.
+description: Use when a problem has material uncertainty, competing explanations, causal/dependency structure, conflicting evidence, path-invalidating assumptions, cross-boundary effects, or repeated work whose progress is unclear.
 ---
 # Progressive Investigation
 A domain-general reasoning control law for **identifying the real problem under partial observability**, reducing decision-relevant uncertainty, and controlling the investigation process when it drifts, stalls, or becomes self-referential.
@@ -161,8 +161,6 @@ observation
 ```
 unless safety, timing, or external constraints justify otherwise.
 ## Epistemic constraints
-
-For agent/tool evidence, use supported exact session/turn reads and distinguish model tool calls, matched results, retained visible content, final output and parent completion. A truncation marker does not prove every source line is missing: inspect the retained bytes and escaped long lines before declaring a coverage failure. An accurate tool return does not by itself establish model comprehension. For Token-use comparisons, input already includes cached input; compare complete tasks of equivalent quality, not isolated output bytes.
 Never silently convert:
 ```plain text
 observation → broader fact

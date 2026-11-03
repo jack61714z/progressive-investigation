@@ -48,7 +48,7 @@ When returning an investigation to any caller, carry the applicable goal and con
 
 ## Examples and verification
 
-[Worked decisions](examples/decisions.md) show a shared test assumption, a misleading research shortlist, and a completed edit that needs no further process.
+[Worked decisions](examples/decisions.md) show a shared test assumption, a misleading research shortlist, a completed edit that needs no further process, and a tool-return capture ambiguity. These examples apply the unchanged investigation core.
 
 [Evaluation report](evals/REPORT.md) includes raw fictional inputs, separate assessor criteria, prompt snapshots and actual responses. A small comparison found the same correct decisions with the existing compact guidance and with additional operational wording. It did **not** demonstrate an improvement from adding rules. The published core therefore preserves the original principles and repairs packaging/navigation instead.
 
